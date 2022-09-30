@@ -1,4 +1,6 @@
-# Rust CHIP-8 Emulator
+# WIP: Rust CHIP-8 Emulator
+
+WIP: 基本上还没啥内容
 
 为了自学计算机组成原理，我参考[JSCHIP-8](https://github.com/ssine/JSCHIP-8)，在 rust 上实现虚拟机。
 
