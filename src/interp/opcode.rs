@@ -1,10 +1,10 @@
-struct Byte(u8); // kk
+pub struct Byte(pub u8); // kk
 
-struct Addr(u16); // nnn
+pub struct Addr(pub u16); // nnn
 
-struct V(u8); // 0x00 - 0x0f
+pub struct V(pub u8); // 0x00 - 0x0f
 
-enum OpCode {
+pub enum OpCode {
     /* 0nnn - SYS addr
     Jump to a machine code routine at nnn.
     This instruction is only used on the old computers on which Chip-8 was originally implemented.
@@ -299,11 +299,11 @@ impl TryFrom<u16> for OpCode {
 impl Into<String> for OpCode {
     fn into(self) -> String {
         match self {
-            OpCode::System(addr) => format!("SYS {}", addr.0),
+            OpCode::System(nnn) => format!("SYS {}", nnn.0),
             OpCode::ClearScreen => "CLS".to_owned(),
             OpCode::Return => "RET".to_owned(),
-            OpCode::Jump(addr) => format!("JP {}", addr.0),
-            OpCode::Call(addr) => format!("CALL {}", addr.0),
+            OpCode::Jump(nnn) => format!("JP {}", nnn.0),
+            OpCode::Call(nnn) => format!("CALL {}", nnn.0),
             OpCode::SkipEqual(x, kk) => format!("SE V{} {}", x.0, kk.0),
             OpCode::SkipNotEqual(x, kk) => format!("SNE V{} {}", x.0, kk.0),
             OpCode::SkipEqualRegister(x, y) => format!("SN V{} V{}", x.0, y.0),
@@ -319,8 +319,8 @@ impl Into<String> for OpCode {
             OpCode::SubNotBorrowRegister(x, y) => format!("SUBN V{} V{}", x.0, y.0),
             OpCode::ShlRegister(x, y) => format!("SHL V{} {{, V{}}}", x.0, y.0),
             OpCode::SkipNotEqualRegister(x, y) => format!("SNE V{}, V{}", x.0, y.0),
-            OpCode::Set(addr) => format!("LD I, {}", addr.0),
-            OpCode::JumpV0(addr) => format!("JP V0, {}", addr.0),
+            OpCode::Set(nnn) => format!("LD I, {}", nnn.0),
+            OpCode::JumpV0(nnn) => format!("JP V0, {}", nnn.0),
             OpCode::Random(x, kk) => format!("RND V{}, {}", x.0, kk.0),
             OpCode::Draw(x, y, nibble) => format!("DRW V{}, V{}, {}", x.0, y.0, nibble),
             OpCode::SkipKey(x) => format!("SKP V{}", x.0),
